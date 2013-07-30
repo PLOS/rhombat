@@ -45,7 +45,7 @@ public class Iso8601DateAdapter implements JsonSerializer<Date>, JsonDeserialize
   @Override
   public JsonElement serialize(Date date, Type type,
       JsonSerializationContext jsonSerializationContext) {
-    Calendar calendar = new GregorianCalendar(TimeZone.getTimeZone("GMT"));
+    Calendar calendar = new GregorianCalendar(TimeZone.getTimeZone("UTC"));
     calendar.setTime(date);
     return new JsonPrimitive(DatatypeConverter.printDateTime(calendar));
   }
