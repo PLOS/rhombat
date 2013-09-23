@@ -10,6 +10,43 @@
   <properties>
     <java-version>1.6</java-version>
   </properties>
+
+  <repositories>
+    <repository>
+      <id>ambra</id>
+      <name>Maven 2 Release Repository for Ambra</name>
+      <url>http://maven.ambraproject.org/maven2/release/</url>
+      <releases>
+        <enabled>true</enabled>
+      </releases>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+    </repository>
+    <repository>
+      <id>ambra.snapshot</id>
+      <name>Maven 2 Snapshot Repository for Ambra</name>
+      <url>http://maven.ambraproject.org/maven2/snapshot/</url>
+      <releases>
+        <enabled>false</enabled>
+      </releases>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
+    </repository>
+  </repositories>
+  <distributionManagement>
+    <repository>
+      <id>ambra</id>
+      <url>scp://maven.ambraproject.org/home/maven2/repository/release</url>
+    </repository>
+    <snapshotRepository>
+      <id>ambra.snapshot</id>
+      <url>scp://maven.ambraproject.org/home/maven2/repository/snapshot</url>
+      <uniqueVersion>false</uniqueVersion>
+    </snapshotRepository>
+  </distributionManagement>
+
   <dependencies>
     <dependency>
       <groupId>com.google.code.gson</groupId>
@@ -44,6 +81,18 @@
           <showWarnings>true</showWarnings>
           <showDeprecation>true</showDeprecation>
         </configuration>
+      </plugin>
+      <plugin>
+        <!-- For pushing to Maven 2 repo from a Maven 3 client -->
+        <artifactId>maven-deploy-plugin</artifactId>
+        <version>2.7</version>
+        <dependencies>
+          <dependency>
+            <groupId>org.apache.maven.wagon</groupId>
+            <artifactId>wagon-ssh</artifactId>
+            <version>2.5</version>
+          </dependency>
+        </dependencies>
       </plugin>
     </plugins>
   </build>
