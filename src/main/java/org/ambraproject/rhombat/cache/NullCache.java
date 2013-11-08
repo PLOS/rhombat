@@ -13,6 +13,8 @@
 
 package org.ambraproject.rhombat.cache;
 
+import java.io.Serializable;
+
 /**
  * An implementation of {@link Cache} that doesn't cache anything, and always returns null.
  */
@@ -22,7 +24,7 @@ public class NullCache implements Cache {
    * {@inheritDoc}
    */
   @Override
-  public <T> T get(String key) {
+  public <T extends Serializable> T get(String key) {
     return null;
   }
 
@@ -30,13 +32,13 @@ public class NullCache implements Cache {
    * {@inheritDoc}
    */
   @Override
-  public void put(String key, Object value) {}
+  public <T extends Serializable> void put(String key, T value) {}
 
   /**
    * {@inheritDoc}
    */
   @Override
-  public void put(String key, Object value, int timeout) {}
+  public <T extends Serializable> void put(String key, T value, int timeout) {}
 
   /**
    * {@inheritDoc}

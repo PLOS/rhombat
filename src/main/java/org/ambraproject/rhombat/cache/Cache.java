@@ -13,6 +13,8 @@
 
 package org.ambraproject.rhombat.cache;
 
+import java.io.Serializable;
+
 /**
  * Interface for a simple key-value cache.  Keys are always Strings while values
  * can be any type that implements {@link java.io.Serializable}.
@@ -26,7 +28,7 @@ public interface Cache {
    * @param <T> type of the value
    * @return the value if it is found in the cache, or null if it is not
    */
-  <T> T get(String key);
+  <T extends Serializable> T get(String key);
 
   /**
    * Stores a value in the cache.  The inserted value may have a TTL that is implementation-dependent.
@@ -35,7 +37,7 @@ public interface Cache {
    * @param key cache key
    * @param value object to store
    */
-  void put(String key, Object value);
+  <T extends Serializable> void put(String key, T value);
 
   /**
    * Stores a value in the cache.
@@ -44,7 +46,7 @@ public interface Cache {
    * @param value object to store
    * @param ttl cache TTL for the value, in seconds
    */
-  void put(String key, Object value, int ttl);
+  <T extends Serializable> void put(String key, T value, int ttl);
 
   /**
    * Removes a key/value mapping from the cache, if it exists.

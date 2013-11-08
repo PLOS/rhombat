@@ -18,6 +18,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.net.InetSocketAddress;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
@@ -87,7 +88,7 @@ public class MemcacheClient implements Cache {
    * was actually in the cache.
    */
   @Override
-  public <T> T get(String key) {
+  public <T extends Serializable> T get(String key) {
     key = buildKey(key);
     Object result = null;
     Future<Object> future = client.asyncGet(key);
@@ -115,7 +116,7 @@ public class MemcacheClient implements Cache {
    * {@inheritDoc}
    */
   @Override
-  public void put(String key, Object value) {
+  public <T extends Serializable> void put(String key, T value) {
     put(key, value, defaultTtl);
   }
 
@@ -123,7 +124,7 @@ public class MemcacheClient implements Cache {
    * {@inheritDoc}
    */
   @Override
-  public void put(String key, Object value, int timeout) {
+  public <T extends Serializable> void put(String key, T value, int timeout) {
     client.set(buildKey(key), timeout, value);
   }
 
