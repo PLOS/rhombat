@@ -36,6 +36,8 @@ import java.util.TimeZone;
  */
 public class Iso8601DateAdapter implements JsonSerializer<Date>, JsonDeserializer<Date> {
 
+  private static final TimeZone UTC = TimeZone.getTimeZone("UTC");
+
   // Implementation note: it would be most straightforward to use a SimpleDateFormat
   // here, but prior to Java 7, it is not possible for this class to correctly
   // parse ISO 8601 dates in the UTC timezone.
@@ -45,7 +47,7 @@ public class Iso8601DateAdapter implements JsonSerializer<Date>, JsonDeserialize
   @Override
   public JsonElement serialize(Date date, Type type,
       JsonSerializationContext jsonSerializationContext) {
-    Calendar calendar = new GregorianCalendar(TimeZone.getTimeZone("UTC"));
+    Calendar calendar = new GregorianCalendar(UTC);
     calendar.setTime(date);
     return new JsonPrimitive(DatatypeConverter.printDateTime(calendar));
   }
