@@ -43,7 +43,7 @@ public class Iso8601CalendarAdapter implements JsonSerializer<Calendar>, JsonDes
   @Override
   public JsonElement serialize(Calendar calendar, Type type,
       JsonSerializationContext jsonSerializationContext) {
-    calendar.setTimeZone(TimeZone.getTimeZone("UTC"));
+    calendar.setTimeZone(Iso8601Util.UTC);
     return new JsonPrimitive(DatatypeConverter.printDateTime(calendar));
   }
 
@@ -51,7 +51,7 @@ public class Iso8601CalendarAdapter implements JsonSerializer<Calendar>, JsonDes
   public Calendar deserialize(JsonElement jsonElement, Type type,
       JsonDeserializationContext jsonDeserializationContext) {
     Calendar calendar = DatatypeConverter.parseDateTime(jsonElement.getAsString());
-    calendar.setTimeZone(TimeZone.getTimeZone("UTC"));
+    calendar.setTimeZone(Iso8601Util.UTC);
     return calendar;
   }
 }
