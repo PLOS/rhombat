@@ -36,6 +36,13 @@ import java.util.TimeZone;
  */
 public class Iso8601DateAdapter implements JsonSerializer<Date>, JsonDeserializer<Date> {
 
+  /**
+   * Constant object representing the UTC time zone.
+   * <p/>
+   * Avoiding redundant calls to {@link TimeZone#getTimeZone} is especially important because that method is {@code
+   * static syncrhonized}. Calling it from an adapter object's instance method leads to contention and slowness if the
+   * adapter (or a {@link com.google.gson.Gson} object containing it) is shared among many threads.
+   */
   private static final TimeZone UTC = TimeZone.getTimeZone("UTC");
 
   // Implementation note: it would be most straightforward to use a SimpleDateFormat
