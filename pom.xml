@@ -28,7 +28,7 @@
   <artifactId>rhombat</artifactId>
   <name>rhombat</name>
   <packaging>jar</packaging>
-  <version>1.0.2</version>
+  <version>1.0.3-SNAPSHOT</version>
   <properties>
     <java-version>1.8</java-version>
     <org.slf4j-version>1.6.6</org.slf4j-version>
