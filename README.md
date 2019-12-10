@@ -1,5 +1,7 @@
 [![Build Status Badge]][Build Status]
 
+**This repo is obsolete, rhombat is no longer used.**
+
 Rhombat is a small library of code shared between
 [Rhino](https://github.com/PLOS/rhino) and
 [Wombat](https://github.com/PLOS/wombat).
